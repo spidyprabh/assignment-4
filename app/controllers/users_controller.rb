@@ -4,7 +4,12 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @search = params[:search]
+    conditions = []
+    if !@search.blank?
+      conditions = ["name like ? or email like ? or phone like ? or city like ? or address like ? or vehicle_make like ? or vehicle_model like ?", "%#{@search}%","%#{@search}%","%#{@search}%","%#{@search}%","%#{@search}%","%#{@search}%","%#{@search}%"]
+    end
+    @users = User.where(conditions).all.order(id: :desc)
   end
 
   # GET /users/1
