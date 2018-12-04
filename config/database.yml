@@ -1,0 +1,22 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  timeout: 5000
+  username: root
+  password: root
+  host: localhost
+
+development:
+  <<: *default
+  database: assignment_4_development
+
+test:
+  <<: *default
+  database: assignment_4_test
+
+production:
+  <<: *default
+  database: <%= ENV["GM_DB_DATABASE"] %>
+  username: <%= ENV["GM_DB_USERNAME"] %>
+  password: <%= ENV["GM_DB_PASSWORD"] %>
